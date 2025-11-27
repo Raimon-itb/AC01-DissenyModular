@@ -5,98 +5,68 @@ public class Program
 {
     public static void Main()
     {
-        const string MenuPrint = "===DEGREE CONVERSOR===";
-        const string Option1 = "1.Convert Celssius to Fahrenheit";
-        const string Option2 = "2.Convert Fahrenheit to Celssius";
-        const string Option3 = "3. Convert Celssius to Kelvin";
-        const string Exit = "0. Exit";
-        const string MsgExit = "Exiting Conversor...";
-        const string MsgInputDegree = "What tempeture want to get: ";
-        const string MsgOption = "What conversion you want to do(Options 1-3): ";
-        const string MsgResult = "Youre temperature is {0}º";
-        const string MsgFormatError = "The input degree is not the correct format. Only decimals allowed.";
-        const int MaxTries = 3;
-
-        float temperature = 0;
-        float degree = 0;
-        int option = 0;
-        int tries = 0;
+        Console.OutputEncoding = System.Text.Encoding.UTF8;
 
 
-        
-        do
+        const string IniciCalculador = "===Calculator of Parking Ticket===";
+        const string MsgInici = "First you put the hours you want to calculate (if its less than 1 hour put 0) and then the minuts!";
+        const string MsgHours = "How many hours did you stay: ";
+        const string MsgMinuts = "How many minuts did you stay: ";
+        const string MsgResult = "The price for {0}:{1} hours is {2}€!";
+        const string MsgFormatError = "Format error. Hours and minuts have to be integer numbers";
+
+        int hours = 0;
+        int minuts = 0;
+        float totalTime = 0;
+        float finalPrice = 0;
+        bool format = false;
+
+        Console.WriteLine(IniciCalculador);
+        Console.WriteLine("");
+        Console.WriteLine(MsgInici);
+        Console.WriteLine("");
+        while (!format)
         {
-            
             try
             {
-                Console.WriteLine(MsgInputDegree);
-                temperature = float.Parse(Console.ReadLine());
-
-                Console.WriteLine(MenuPrint);
-                Console.WriteLine("");
-                Console.WriteLine(Option1);
-                Console.WriteLine(Option2);
-                Console.WriteLine(Option3);
-                Console.WriteLine(Exit);
-                Console.WriteLine("");
-
-                Console.WriteLine("");
-                Console.WriteLine(MsgOption);
-                option = Int32.Parse(Console.ReadLine());
-                switch (option)
-                {
-                    case 1:
-                        degree = ConversioFareheid(temperature);
-                        degree = (float)Math.Round(degree, 2);
-                        Console.WriteLine(MsgResult, degree);
-                        break;
-                    case 2:
-                        degree = ConversioCelssius(temperature);
-                        degree = (float)Math.Round(degree, 2);
-                        Console.WriteLine(MsgResult, degree);
-                        break;
-                    case 3:
-                        degree = ConversioKelvin(temperature);
-                        degree = (float)Math.Round(degree, 2);
-                        Console.WriteLine(MsgResult, degree);
-                        break;
-                    case 0:
-                        Console.WriteLine(MsgExit);
-                        return;
-                }
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();  
+                Console.WriteLine(MsgHours);
+                hours = Int32.Parse(Console.ReadLine());
+                Console.WriteLine(MsgMinuts);
+                minuts = Int32.Parse(Console.ReadLine());
                 Console.Clear();
+
+                totalTime = hours + (minuts / 60f);
+                totalTime = (float)Math.Round(totalTime, 2);
+
+                finalPrice = CalculadoraParking(totalTime);
+                finalPrice = (float)Math.Round(finalPrice, 2);
+
+                Console.WriteLine(MsgResult, hours, minuts, finalPrice);
+
 
             }
             catch (FormatException)
             {
                 Console.WriteLine(MsgFormatError);
-               
-                tries++;
-                Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();  
-                Console.Clear();
+                Console.WriteLine("");
             }
-        } while (tries < MaxTries);
-
-
-
-
-    }
-    public static float ConversioCelssius(float degree)
-    {
-        return (degree - 32) * 5 / 9; 
+        }
         
     }
-    public static float ConversioFareheid(float degree)
+    public static float CalculadoraParking(float hour)
     {
-        return degree * 9 / 5 + 32; 
-
-    }
-    public static float ConversioKelvin(float degree)
-    {
-        return degree + 273.15f;
-
+        if (hour <= 1)
+        {
+            return 3.50f;
+        }
+        else if (hour >= 2 && hour <= 5)
+        {
+            return 2.00f * hour;
+        }
+        else
+        {
+            return 1.50f * hour;
+        }
+        
     }
 }
