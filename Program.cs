@@ -25,7 +25,7 @@ public class Program
         } 
         catch (FormatException)
         {
-            Console.WriteLine(MsgFormatError,number);
+            Console.WriteLine(MsgFormatError);
         }
         
 
