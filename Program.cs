@@ -19,7 +19,7 @@ public class Program
         {
             number = Int32.Parse(Console.ReadLine());
             Console.WriteLine(number);
-            validated = Validar(number, Minim, Maxim);
+            validated = InRange(number, Minim, Maxim);
 
             Console.Write(MsgResult, Minim, Maxim, number, validated);
         } 
@@ -30,7 +30,7 @@ public class Program
         
 
     }
-    public static bool Validar(int num, int min, int max)
+    public static bool InRange(int num, int min, int max)
     {
 
         if (num < max && num > min)
