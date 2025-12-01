@@ -18,7 +18,7 @@ public class Program
         try 
         {
             number = Int32.Parse(Console.ReadLine());
-            Console.WriteLine(number);
+            
             validated = InRange(number, Minim, Maxim);
 
             Console.Write(MsgResult, Minim, Maxim, number, validated);
