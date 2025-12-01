@@ -1,4 +1,3 @@
-﻿
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 public class Program
@@ -15,6 +14,7 @@ public class Program
         const string MsgOption = "What conversion you want to do(Options 1-3): ";
         const string MsgResult = "Youre temperature is {0}º";
         const string MsgFormatError = "The input degree is not the correct format. Only decimals allowed.";
+        const string MsgOptionError = "The input option is not a correct option. Options 0 - 3.";
         const int MaxTries = 3;
 
         float temperature = 0;
@@ -23,10 +23,10 @@ public class Program
         int tries = 0;
 
 
-        
+
         do
         {
-            
+
             try
             {
                 Console.WriteLine(MsgInputDegree);
@@ -63,19 +63,23 @@ public class Program
                     case 0:
                         Console.WriteLine(MsgExit);
                         return;
+                    default:
+                        Console.WriteLine(MsgOptionError);
+                        tries++;
+                        break;
                 }
                 Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();  
+                Console.ReadKey();
                 Console.Clear();
 
             }
             catch (FormatException)
             {
                 Console.WriteLine(MsgFormatError);
-               
+
                 tries++;
                 Console.WriteLine("Press any key to continue...");
-                Console.ReadKey();  
+                Console.ReadKey();
                 Console.Clear();
             }
         } while (tries < MaxTries);
@@ -86,12 +90,12 @@ public class Program
     }
     public static float ConversioCelssius(float degree)
     {
-        return (degree - 32) * 5 / 9; 
-        
+        return (degree - 32) * 5 / 9;
+
     }
     public static float ConversioFareheid(float degree)
     {
-        return degree * 9 / 5 + 32; 
+        return degree * 9 / 5 + 32;
 
     }
     public static float ConversioKelvin(float degree)
